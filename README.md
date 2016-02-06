@@ -1,3 +1,12 @@
+#HEllo!!!!!!!!!
+This is a Forked version of https://github.com/shama/gruntfile
+
+I added and editted grunt package in grunt file.
+This is ready to use.
+
+by thu_sama
+
+
 # grunt-init-gruntfile
 
 > Create a basic Gruntfile with [grunt-init][].
