@@ -1,15 +1,22 @@
 /*
+ * grunt-inti-gruntfile
+ * https://gruntjs.com/
+ *
+ * Forked by thu_sama
+ */
+
+/*
  * grunt-init-gruntfile
  * https://gruntjs.com/
  *
- * Copyright (c) 2016 "Cowboy" Ben Alman, contributors
+ * Copyright (c) 2012 "Cowboy" Ben Alman, contributors
  * Licensed under the MIT license.
  */
 
 'use strict';
 
 // Basic template description.
-exports.description = 'Create a basic Gruntfile.';
+exports.description = 'Create a Complete Gruntfile.';
 
 // Template-specific notes to be displayed before question prompts.
 exports.notes = 'This template tries to guess file and directory paths, but ' +
@@ -25,30 +32,7 @@ exports.template = function(grunt, init, done) {
 
   init.process({}, [
     // Prompt for these values.
-    {
-      name: 'dom',
-      message: 'Is the DOM involved in ANY way?',
-      default: 'Y/n',
-      warning: 'Yes: QUnit unit tests + JSHint "browser" globals. No: Nodeunit unit tests.'
-    },
-    {
-      name: 'min_concat',
-      message: 'Will files be concatenated or minified?',
-      default: 'Y/n',
-      warning: 'Yes: min + concat tasks. No: nothing to see here.'
-    },
-    {
-      name: 'package_json',
-      message: 'Will you have a package.json file?',
-      default: 'Y/n',
-      warning: 'This changes how filenames are determined and banners are generated.'
-    }
   ], function(err, props) {
-    props.dom = /y/i.test(props.dom);
-    props.min_concat = /y/i.test(props.min_concat);
-    props.package_json = /y/i.test(props.package_json);
-    props.test_task = props.dom ? 'qunit' : 'nodeunit';
-    props.file_name = props.package_json ? '<%= pkg.name %>' : 'FILE_NAME';
 
     // Find the first `preferred` item existing in `arr`.
     function prefer(arr, preferred) {
@@ -76,30 +60,35 @@ exports.template = function(grunt, init, done) {
 
 
     // If is package_json true, generate package.json
-    if (props.package_json) {
-      var devDependencies = {
-        'grunt': '~0.4.5',
-        'grunt-contrib-jshint': '~0.10.0',
-        'grunt-contrib-watch': '~0.6.1'
-      };
+    var devDependencies = {
+      "grunt": "latest",
+      "grunt-autopolyfiller": "latest",
+      "grunt-autoprefixer": "latest",
+      "grunt-browser-sync": "latest",
+      "grunt-concurrent": "latest",
+      "grunt-contrib-clean": "latest",
+      "grunt-contrib-concat": "latest",
+      "grunt-contrib-csslint": "latest",
+      "grunt-contrib-cssmin": "latest",
+      "grunt-contrib-htmlmin": "latest",
+      "grunt-contrib-jshint": "latest",
+      "grunt-contrib-qunit": "latest",
+      "grunt-contrib-sass": "latest",
+      "grunt-contrib-uglify": "latest",
+      "grunt-contrib-watch": "latest",
+      "grunt-csscomb": "latest",
+      "grunt-jsbeautifier": "latest",
+      "grunt-modernizr": "latest",
+      "grunt-uncss": "latest",
+      "grunt-w3c-html-validation": "latest",
+      "load-grunt-tasks": "latest"
+    };
 
-      if (props.dom) {
-        devDependencies['grunt-contrib-qunit'] = '~0.5.2';
-      } else {
-        devDependencies['grunt-contrib-nodeunit'] = '~0.4.1';
-      }
-
-      if (props.min_concat) {
-        devDependencies['grunt-contrib-concat'] = '~0.4.0';
-        devDependencies['grunt-contrib-uglify'] = '~0.5.0';
-      }
-
-      // Generate package.json file, used by npm and grunt.
-      init.writePackageJSON('package.json', {
-        node_version: '>= 0.10.0',
-        devDependencies: devDependencies
-      });
-    }
+    // Generate package.json file, used by npm and grunt.
+    init.writePackageJSON('package.json', {
+      node_version: 'latest',
+      devDependencies: devDependencies
+    });
 
     // All done!
     done();
